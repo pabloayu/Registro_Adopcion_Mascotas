@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalles de Mascota</title>
+    <style>
+        body {
+            font-family: "Geogia", sans-serif;
+            background-color: rgb(255, 225, 225);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: rgb(255, 128, 128);
+            margin-top: 20px;
+        }
+        .container {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgb(255, 128, 128);
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        span {
+            font-weight: bold;
+            color: #555;
+        }
+        .alert {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .details p {
+            margin-bottom: 10px;
+        }
+        .btn-custom {
+            background-color: rgb(255, 128, 128);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: rgb(255, 75, 150);
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center" th:text="${error} ? 'Error' : 'Detalles de la Mascota'"></h1>
+        <div th:if="${error}" class="alert alert-danger text-center">
+            <p th:text="${mensaje}"></p>
+        </div>
+        <div th:unless="${error}" class="details">
+            <p><strong>ID:</strong> <span th:text="${mascota.id}"></span></p>
+            <p><strong>Nombre:</strong> <span th:text="${mascota.nombre}"></span></p>
+            <p><strong>Fecha de Nacimiento:</strong> <span th:text="${#dates.format(mascota.fechaNac, 'yyyy-MM-dd')}"></span></p>
+            <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+            <p><strong>Peso:</strong> <span th:text="${mascota.peso}"></span></p>
+            <p><strong>Tiene Chip:</strong> <span th:text="${mascota.tieneChip ? 'Sí' : 'No'}"></span></p>
+            <p><strong>URL de Foto:</strong> <a th:href="${mascota.urlFoto}" th:text="${mascota.urlFoto}"></a></p>
+        </div>
+        <div class="text-center">
+            <a href="/mascotas" class="btn btn-custom">Volver a la lista</a>
+        </div>
+    </div>
+</body>
+</html>
+

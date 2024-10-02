@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar nueva mascota</title>
+    <style>
+        body {
+            font-family: "Georgia", sans-serif;
+            background-color: rgb(255, 225, 225);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        form {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid rgb(255, 0, 128);
+            margin-bottom: 10px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: rgb(255, 128, 128);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: rgb(255, 0, 128);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: rgb(255, 0, 128);
+            font-size: 16px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+		a {
+		           display: inline-block;
+		           margin-top: 20px;
+		           text-decoration: none;
+		           color: rgb(255, 0, 128);
+		           font-size: 16px;
+		       }
+		       a:hover {
+		           text-decoration: underline;
+		       }
+    </style>
+</head>
+<body>
+    <h1>Agregar nueva mascota</h1>
+    <form th:action="@{/mascotas}" th:object="${mascota}" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" />
+
+        <label for="fechaNac">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNac" th:field="*{fechaNac}" />
+
+        <label for="raza">Raza:</label>
+        <input type="text" id="raza" th:field="*{raza}" />
+
+        <label for="peso">Peso:</label>
+        <input type="number" id="peso" th:field="*{peso}" />
+
+        <label for="tieneChip">Tiene Chip:</label>
+        <input type="checkbox" id="tieneChip" th:field="*{tieneChip}" />
+
+        <label for="urlFoto">URL de Foto:</label>
+        <input type="text" id="urlFoto" th:field="*{urlFoto}" />
+
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="/mascotas">Volver a la lista</a>
+	<a href="/">Volver al inicio</a>
+</body>
+</html>

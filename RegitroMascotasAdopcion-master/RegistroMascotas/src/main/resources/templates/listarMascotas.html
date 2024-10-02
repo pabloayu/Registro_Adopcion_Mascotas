@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Mascotas</title>
+    <style>
+        body {
+            font-family: "Georgia", sans-serif;
+            background-color: rgb(255, 225, 225);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: rgb(255, 128, 128);
+            margin-top: 20px;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgb(255, 255, 255);
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: rgb(255, 128, 128);
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            margin: 20px;
+        }
+        .pagination a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: rgb(255, 128, 128);
+            border: 1px solid rgb(255, 0, 128);
+            border-radius: 4px;
+        }
+        .pagination a:hover {
+            background-color: rgb(255, 0, 128);
+            color: #fff;
+        }
+        .pagination span {
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        .form-group {
+            margin: 20px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgb(255, 128, 128);
+            color: #fff;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .form-group button:hover {
+            background-color: rgb(255, 0, 128);
+        }
+        .delete-button {
+            background-color: rgb(255, 0, 128);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: rgb(255, 0, 128);
+        }
+		a {
+		    display: inline-block;
+		    margin-top: 20px;
+		    text-decoration: none;
+		    color: rgb(255, 0, 128);
+		    font-size: 16px;
+		}
+		a:hover {
+		    text-decoration: underline;
+		}
+    </style>
+	</head>
+	<body>
+	    <div class="container">
+	        <h1>Lista de Mascotas</h1>
+
+	        <!-- Search form by name -->
+	        <form action="/mascotas/buscarPorNombre" method="get" class="form-group">
+	            <label for="nombre">Buscar por nombre:</label>
+	            <input type="text" id="nombre" name="nombre" th:value="${param.nombre}" />
+	            <button type="submit">Buscar</button>
+	        </form>
+
+	        <!-- Search form by ID -->
+	        <form action="/mascotas/buscarPorId" method="get" class="form-group">
+	            <label for="id">Buscar por ID:</label>
+	            <input type="number" id="id" name="id" th:value="${param.id}" />
+	            <button type="submit">Buscar</button>
+	        </form>
+			
+
+	        <!-- Show list of all pets -->
+	        <div th:if="${mascotas != null}">
+	            <table>
+	                <thead>
+	                    <tr>
+	                        <th>ID</th>
+	                        <th>Nombre</th>
+	                        <th>Fecha de Nacimiento</th>
+	                        <th>Raza</th>
+	                        <th>Peso</th>
+	                        <th>Tiene Chip</th>
+	                        <th>URL de Foto</th>
+	                        <th>Acciones</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr th:each="mascota : ${mascotas}">
+	                        <td th:text="${mascota.id}"></td>
+	                        <td th:text="${mascota.nombre}"></td>
+	                        <td th:text="${#dates.format(mascota.fechaNac, 'yyyy-MM-dd')}"></td>
+	                        <td th:text="${mascota.raza}"></td>
+	                        <td th:text="${mascota.peso}"></td>
+	                        <td th:text="${mascota.tieneChip ? 'Sí' : 'No'}"></td>
+	                        <td th:text="${mascota.urlFoto}"></td>
+	                        <td>
+	                            <!-- Disposal Form -->
+	                            <form th:action="@{/mascotas/borrar/{id}(id=${mascota.id})}" method="post" class="delete-form">
+	                                <button type="submit" class="delete-button">Eliminar</button>
+	                            </form>
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+
+	        <!-- Paging controls -->
+	        <div class="pagination">
+	            <a th:if="${pagina > 0}" th:href="@{/mascotas(pagina=${pagina - 1}, tamano=${tamano})}">Anterior</a>
+	            <span>Página <span th:text="${pagina + 1}"></span> de <span th:text="${totalPaginas}"></span></span>
+	            <a th:if="${pagina < totalPaginas - 1}" th:href="@{/mascotas(pagina=${pagina + 1}, tamano=${tamano})}">Siguiente</a>
+	        </div>
+
+	        <!-- Add another pet button -->
+	        <div>
+	            <a href="/mascotas/nuevo" class="add-button">Agregar mascota</a>
+	        </div>
+			
+	        <a href="/" class="form-group">Volver al inicio</a>
+	    </div>
+	</body>
+	</html>

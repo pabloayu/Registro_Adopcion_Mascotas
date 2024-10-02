@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Eliminar mascota</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(255, 225, 225);;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        .container {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+        }
+        p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        span {
+            font-weight: bold;
+            color: rgb(255, 0, 128);
+        }
+        button {
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Eliminar mascota</h1>
+    <div class="container">
+        <p>¿Estás seguro de que deseas eliminar la mascota <span th:text="${mascota.nombre}"></span>?</p>
+        <form th:action="@{/mascotas/borrar/{id}(id=${mascota.id})}" method="post">
+            <button type="submit">Eliminar</button>
+            <a href="/mascotas">Cancelar</a>
+        </form>
+    </div>
+	<a href="/">Volver al inicio</a>
+</body>
+</html>

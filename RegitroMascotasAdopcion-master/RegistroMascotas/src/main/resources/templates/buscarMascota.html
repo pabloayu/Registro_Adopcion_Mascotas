@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buscar mascotas</title>
+    <style>
+        body {
+            font-family: "Georgia", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(255, 225, 225);
+			text-align: center;
+        }
+		.container {
+		    width: 90%;
+		    max-width: 1200px;
+		    margin: 0 auto;
+		    padding: 20px;
+		    background-color: #fff;
+		    border-radius: 8px;
+		    box-shadow: 0 0 10px rgb(255, 255, 255);
+        }
+		h1 {
+			color: rgb(255, 128, 128);
+			margin-top: 20px;
+        }
+        table {
+			margin: 20px auto;
+			border-collapse: collapse;
+			width: 100%;
+			background-color: rgb(255, 255, 255);
+        }
+		th, td {
+		    padding: 12px;
+		    border: 1px solid #ddd;
+		    text-align: left;
+		}
+		th {
+		    background-color: rgb(255, 128, 128);
+		    color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: rgb(255, 255, 255);
+        }
+        .delete-form {
+            display: inline;
+        }
+        .delete-button {
+            background-color: rgb(255, 128, 128);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: rgb(255, 128, 128);
+        }
+        .form-group {
+            display: block;
+            margin: 20px 0;
+        }
+        a {
+            display: inline-block;
+            margin: 10px 0;
+            color: rgb(255, 0, 128);
+            text-decoration: none;
+        }
+		
+		.form-group button {
+		    padding: 10px 15px;
+		    border: none;
+		    border-radius: 4px;
+		    background-color: rgb(255, 128, 128);
+		    color: #fff;
+		    cursor: pointer;
+		    margin-left: 10px;
+		}
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultados de la Búsqueda</h1>
+
+        <!-- Show search results by name -->
+        <div th:if="${mascotas != null and #lists.size(mascotas) > 0}">
+            <h2> <span th:text="${nombre}"></span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Raza</th>
+                        <th>Peso</th>
+                        <th>Tiene Chip</th>
+                        <th>URL de Foto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="mascota : ${mascotas}">
+                        <td th:text="${mascota.id}"></td>
+                        <td th:text="${mascota.nombre}"></td>
+                        <td th:text="${#dates.format(mascota.fechaNac, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${mascota.raza}"></td>
+                        <td th:text="${mascota.peso}"></td>
+                        <td th:text="${mascota.tieneChip ? 'Sí' : 'No'}"></td>
+                        <td th:text="${mascota.urlFoto}"></td>
+                        <td>
+                            <!-- Disposal Form -->
+                            <form th:action="@{/mascotas/borrar/{id}(id=${mascota.id})}" method="post" class="delete-form">
+                                <button type="submit" class="delete-button">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/" class="form-group">Volver al inicio</a>
+    </div>
+</body>
+</html>

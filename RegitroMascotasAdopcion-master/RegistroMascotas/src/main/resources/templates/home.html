@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicio</title>
+    <style>
+        /* Style for the main container */
+        .container {
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* Title Style */
+        .title {
+            font-family: 'Georgia', sans-serif;
+            font-size: 36px;
+            color: rgb(255, 128, 128); 
+            text-shadow: 2px 2px 4px #000000;
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            margin-bottom: 20px; 
+        }
+
+        /* Style for the main image */
+        .image-container {
+            display: flex; 
+            justify-content: center; 
+            margin-bottom: 20px; 
+        }
+
+        .main-image {
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 10px; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); 
+        }
+
+        /* Style for the buttons */
+        .buttons {
+            display: flex; 
+            justify-content: center;
+            gap: 10px; 
+            flex-wrap: wrap; 
+        }
+
+        .button {
+            text-decoration: none;
+            background-color: rgb(255, 128, 128); 
+            color: #ffffff; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            font-size: 15px; 
+            font-weight: bold; 
+            transition: background-color 0.3s; 
+        }
+
+        .button:hover {
+            background-color: rgb(255, 0, 128);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Adopta a tu compañero fiel</h1>
+        <div class="image-container">
+            <img src="/images/mascotas.png" alt="Mascotas" class="main-image">
+        </div>
+        <div class="buttons">
+            <a href="/mascotas" class="button">Ver mascotas</a>
+            <a href="/mascotas/nuevo" class="button">Agregar nueva mascota</a>
+			<a href="/mascotas/jovenes"class="button">Ver las 20 mascotas más jóvenes</a>
+            <a href="http://localhost:8080/swagger-ui.html" class="button">Contacto</a>
+        </div>
+    </div>
+</body>
+</html>

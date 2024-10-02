@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Nuestras 20 mascotas más jóvenes</title>
+    <style>
+        body {
+			font-family: "Georgia", sans-serif;
+			background-color: rgb(255, 225, 225);
+			margin: 0;
+			padding: 0;
+			text-align: center;
+        }
+
+        h1 {
+			color: rgb(255, 128, 128);
+			margin-top: 20px;
+        }
+
+        table {
+			margin: 20px auto;
+			border-collapse: collapse;
+			width: 100%;
+			background-color: rgb(255, 255, 255);
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgb(255, 128, 128);
+            color: #ffffff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #d1ecf1;
+        }
+
+        .container {
+			width: 90%;
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 0 10px rgb(255, 255, 255);
+        }
+		a {
+		    display: inline-block;
+		    margin-top: 20px;
+		    text-decoration: none;
+		    color: rgb(255, 0, 128);
+		    font-size: 16px;
+		}
+		a:hover {
+		    text-decoration: underline;
+		}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nuestras 20 mascotas más jóvenes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Raza</th>
+                    <th>Peso</th>
+                    <th>Tiene Chip</th>
+                    <th>URL Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="mascota : ${mascotas}">
+                    <td th:text="${mascota.id}">ID</td>
+                    <td th:text="${mascota.nombre}">Nombre</td>
+                    <td th:text="${mascota.fechaNac}">Fecha de Nacimiento</td>
+                    <td th:text="${mascota.raza}">Raza</td>
+                    <td th:text="${mascota.peso}">Peso</td>
+                    <td th:text="${mascota.tieneChip ? 'Sí' : 'No'}">Tiene Chip</td>
+                    <td th:text="${mascota.urlFoto}">URL Foto</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+	<a href="/mascotas">Volver a la lista</a>
+	<a href="/">Volver al inicio</a>
+</body>
+</html>
+
