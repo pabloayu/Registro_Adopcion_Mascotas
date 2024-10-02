@@ -35,3 +35,6 @@ Este es un proyecto de demostración construido con **Spring Boot** para una apl
 1. **Clonar el repositorio**:
    ```bash
    git clone https://github.com/tu-usuario/taco-shop.git
+
+http://localhost:8080/swagger-ui.html
+
